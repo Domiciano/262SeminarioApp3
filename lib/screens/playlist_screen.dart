@@ -22,6 +22,12 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     });
   }
 
+  void _deleteSong(Song song) {
+    setState(() {
+      _songs.remove(song);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +38,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
           child: Column(
             children: [
               SongForm(addSong: _addSong),
-              SongList(songs: _songs),
+              SongList(songs: _songs, removeSong: _deleteSong),
             ],
           ),
         ),

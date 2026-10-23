@@ -5,7 +5,9 @@ import 'package:miapp6/models/song.dart';
 class SongCard extends StatelessWidget {
   final Song song;
 
-  const SongCard({super.key, required this.song});
+  final Function(Song song) removeSong;
+
+  const SongCard({super.key, required this.song, required this.removeSong});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +31,7 @@ class SongCard extends StatelessWidget {
             width: 64,
             height: 64,
             clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
             child: Image.network(song.imageUrl, fit: BoxFit.cover),
           ),
           const SizedBox(width: 12),
@@ -63,7 +63,9 @@ class SongCard extends StatelessWidget {
             icon: const Icon(Icons.favorite_border, color: Colors.deepPurple),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              removeSong(song);
+            },
             icon: const Icon(Icons.delete_outline, color: Colors.black54),
           ),
         ],

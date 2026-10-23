@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miapp6/components/song_card.dart';
+import 'package:miapp6/components/song_form.dart';
+import 'package:miapp6/components/song_list.dart';
 import 'package:miapp6/models/song.dart';
 
 /// Screen that builds a playlist from a form.
@@ -12,20 +14,11 @@ class PlaylistScreen extends StatefulWidget {
 
 class _PlaylistScreenState extends State<PlaylistScreen> {
   final List<Song> _songs = [];
-  final _titleController = TextEditingController();
-  final _artistController = TextEditingController();
-  final _imageUrlController = TextEditingController()
-    ..text = "https://picsum.photos/400";
 
-  void _addSong() {
+  //Declarar la funcion
+  void _addSong(Song song) {
     setState(() {
-      _songs.add(
-        Song(
-          title: _titleController.text,
-          artist: _artistController.text,
-          imageUrl: _imageUrlController.text,
-        ),
-      );
+      _songs.add(song);
     });
   }
 
@@ -38,37 +31,12 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              TextField(
-                controller: _titleController,
-                decoration: const InputDecoration(labelText: 'Canción'),
-              ),
-              TextField(
-                controller: _artistController,
-                decoration: const InputDecoration(labelText: 'Artista'),
-              ),
-              TextField(
-                controller: _imageUrlController,
-                decoration: const InputDecoration(
-                  labelText: 'URL de la imagen',
-                ),
-              ),
-              FilledButton(
-                onPressed: () => _addSong(),
-                child: const Text('Agregar'),
-              ),
-              for (final song in _songs) SongCard(song: song),
+              SongForm(addSong: _addSong),
+              SongList(songs: _songs),
             ],
           ),
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _titleController.dispose();
-    _artistController.dispose();
-    _imageUrlController.dispose();
-    super.dispose();
   }
 }

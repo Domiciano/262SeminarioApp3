@@ -14,15 +14,18 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   final List<Song> _songs = [];
   final _titleController = TextEditingController();
   final _artistController = TextEditingController();
-  final _imageUrlController = TextEditingController();
+  final _imageUrlController = TextEditingController()
+    ..text = "https://picsum.photos/400";
 
   void _addSong() {
     setState(() {
-      _songs.add(Song(
-        title: _titleController.text,
-        artist: _artistController.text,
-        imageUrl: _imageUrlController.text,
-      ));
+      _songs.add(
+        Song(
+          title: _titleController.text,
+          artist: _artistController.text,
+          imageUrl: _imageUrlController.text,
+        ),
+      );
     });
   }
 
@@ -45,7 +48,9 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
               ),
               TextField(
                 controller: _imageUrlController,
-                decoration: const InputDecoration(labelText: 'URL de la imagen'),
+                decoration: const InputDecoration(
+                  labelText: 'URL de la imagen',
+                ),
               ),
               FilledButton(
                 onPressed: () => _addSong(),

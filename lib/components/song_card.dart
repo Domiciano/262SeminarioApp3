@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miapp6/models/song.dart';
 
-/// Card for a song: cover, title and artist.
+/// Card for a song: cover, title, artist, like and delete buttons.
 class SongCard extends StatelessWidget {
   final Song song;
 
@@ -58,7 +58,14 @@ class SongCard extends StatelessWidget {
               ],
             ),
           ),
-          const Icon(Icons.music_note, color: Colors.deepPurple),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.favorite_border, color: Colors.deepPurple),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.delete_outline, color: Colors.black54),
+          ),
         ],
       ),
     );
